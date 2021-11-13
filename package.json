@@ -2,7 +2,21 @@
   "name": "queue-monitor",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-airbnb": "0.0.1-security",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1"
+  },
   "dependencies": {
+    "@apollo/client": "^3.4.17",
+    "@babel/core": "^7.16.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -10,6 +24,7 @@
     "@types/node": "^12.20.37",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
+    "graphql": "^16.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -18,6 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "graphql:schema": "apollo client:download-schema /graphql/schema.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

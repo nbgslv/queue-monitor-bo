@@ -1,0 +1,69 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:jest/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "jsx": true,
+    "sourceType": "module",
+    "useJSXTextNode": true
+  },
+  "plugins": ["@typescript-eslint", "import", "jest", "react", "prettier", "graphql"],
+  "rules": {
+    "graphql/template-strings": ["error",
+      {
+        // Import default settings for your GraphQL client. Supported values:
+        // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
+        "env": "apollo",
+
+        // OR provide absolute path to your schema JSON (but not if using `eslint --cache`!)
+        // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
+        "schemaJsonFilepath": "./src/graphql/schema.json"
+
+        // OR provide the schema in the Schema Language format
+        // schemaString: printSchema(schema),
+
+        // tagName is gql by default
+      }],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ],
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
+    "react/prop-types": [0],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
