@@ -1,14 +1,17 @@
 import React from 'react';
-import { Button, Paper, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
+import { useMutation } from '@apollo/client';
+import { CREATE_NEW_QUEUE } from '../../graphql/mutations';
 
 interface QueueFormValues {
   queueName: string;
 }
 
 const NewQueue = (): React.ReactElement => {
+  const [createNewQueue, { loading }] = useMutation(CREATE_NEW_QUEUE);
   const formik = useFormik<QueueFormValues>({
     initialValues: {
       queueName: '',
@@ -17,7 +20,11 @@ const NewQueue = (): React.ReactElement => {
       queueName: Yup.string().required('Queue name is required'),
     }),
     onSubmit: values => {
-      console.log(values);
+      createNewQueue({
+        variables: {
+          queueName: values.queueName,
+        },
+      });
     },
   });
   return (
@@ -52,8 +59,8 @@ const NewQueue = (): React.ReactElement => {
               padding: '16px 4px',
             }}
           />
-          <Button type="submit" variant="contained">
-            Create
+          <Button type="submit" variant="contained" disabled={loading}>
+            {loading ? <CircularProgress /> : 'Create'}
           </Button>
         </form>
       </div>
