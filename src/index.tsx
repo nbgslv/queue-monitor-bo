@@ -6,9 +6,11 @@ import {
   ApolloProvider,
   concat,
   createHttpLink,
-  InMemoryCache
-} from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+  InMemoryCache,
+} from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { CssBaseline } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
@@ -50,8 +52,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
+    <CssBaseline />
     <ApolloProvider client={client}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')

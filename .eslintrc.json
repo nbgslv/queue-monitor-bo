@@ -1,42 +1,41 @@
 {
   "env": {
     "browser": true,
-    "es6": true,
-    "jest": true,
-    "node": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
+    "plugin:react/recommended",
     "airbnb",
     "plugin:@typescript-eslint/recommended",
-    "plugin:import/typescript",
     "plugin:jest/recommended",
-    "plugin:react/recommended",
-    "prettier"
+    "prettier",
+    "prettier/prettier",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2021,
-    "jsx": true,
-    "sourceType": "module",
-    "useJSXTextNode": true
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "import", "jest", "react", "prettier", "graphql"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
-    "graphql/template-strings": ["error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
       {
-        // Import default settings for your GraphQL client. Supported values:
-        // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
-        "env": "apollo",
-
-        // OR provide absolute path to your schema JSON (but not if using `eslint --cache`!)
-        // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
-        "schemaJsonFilepath": "./src/graphql/schema.json"
-
-        // OR provide the schema in the Schema Language format
-        // schemaString: printSchema(schema),
-
-        // tagName is gql by default
-      }],
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
@@ -44,26 +43,14 @@
         "allowTypedFunctionExpressions": true
       }
     ],
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "import/no-extraneous-dependencies": 0,
-    "react/jsx-filename-extension": ["error", { "extensions": [".jsx", ".tsx"] }],
-    "react/prop-types": [0],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"]
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }]
   },
   "settings": {
-    "react": {
-      "version": "detect"
+    "import/resolver": {
+      "typescript": {}
     }
   }
 }
