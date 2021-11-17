@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Paper, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
@@ -11,7 +11,7 @@ interface QueueFormValues {
 }
 
 const NewQueue = (): React.ReactElement => {
-  const [createNewQueue, { loading }] = useMutation(CREATE_NEW_QUEUE);
+  const [createNewQueue, { loading, error, data }] = useMutation(CREATE_NEW_QUEUE);
   const formik = useFormik<QueueFormValues>({
     initialValues: {
       queueName: '',
@@ -35,22 +35,23 @@ const NewQueue = (): React.ReactElement => {
         padding: '12px',
       }}>
       <div>
+        <Typography
+          sx={{
+            marginBottom: '16px',
+          }}
+          variant="h5">
+          Create New Queue
+        </Typography>
         <form
           onSubmit={formik.handleSubmit}
           className={css`
             display: flex;
             flex-direction: column;
           `}>
-          <Typography
-            sx={{
-              marginBottom: '16px',
-            }}
-            variant="h5">
-            Create New Queue
-          </Typography>
           <TextField
             variant="standard"
             name="queueName"
+            id="queueName"
             onChange={formik.handleChange}
             error={Boolean(formik.errors.queueName) || undefined}
             label="Queue Name"
@@ -62,6 +63,11 @@ const NewQueue = (): React.ReactElement => {
           <Button type="submit" variant="contained" disabled={loading}>
             {loading ? <CircularProgress /> : 'Create'}
           </Button>
+          {data && (
+            <Alert data-testid="create-queue-success" severity="success">
+              Queue created successfully!
+            </Alert>
+          )}
         </form>
       </div>
     </Paper>
